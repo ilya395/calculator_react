@@ -39,7 +39,7 @@ const cssLoaders  = (extra) => {
             options: {
                 hrm: isDev, // hot module replacement // изменяй определенные сущности без перезагрузки страницы 
                 reloadAll: true,
-                publicPath: '../../'
+                publicPath: '/',// '../../'
             },
         }, 
         'css-loader',
@@ -130,7 +130,7 @@ module.exports = {
     context: path.resolve(__dirname, 'src'), // со всех путях  удаляю эту папку
     mode: 'development',
     entry: { // точка входа в приложение, откуда начать
-        script: ['@babel/polyfill', './index.js'],
+        script: ['@babel/polyfill', './index.ts'],
         // style: './assets/sass/style.scss',
         // 'assets/js/index': ['@babel/polyfill', './assets/js/index.js'],
         // 'assets/css/style': './assets/sass/style.scss'
@@ -142,7 +142,7 @@ module.exports = {
     },
     resolve: {
         extensions: [ // какие расширения нужно понимать по умолчанию
-            '.js', '.json', '.png'
+            '.js', '.json', '.png', '.ts', '.tsx'
         ],
        alias: { // путь до корня проекта
            '@': path.resolve(__dirname, 'src')
@@ -163,12 +163,55 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.[tj]sx?$/,
+                exclude: /node_modules/,
+                use: ['ts-loader'],
+            },
+            {
                 test: /\.css$/,
                 use: cssLoaders() 
             },
             {
                 test: /\.s[ac]ss$/,
-                use: cssLoaders('sass-loader')
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hrm: isDev, // hot module replacement // изменяй определенные сущности без перезагрузки страницы 
+                            reloadAll: true,
+                            publicPath: '/',// '../../'
+                        },
+                    }, 
+                    'css-modules-typescript-loader?modules',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                // css модули
+                                mode: 'local',
+                                localIdentName: '[name]__[local]__[hash:base64:5]', //
+                                auto: /\.module\.\w+$/i, // использование модулей
+                            },
+                        },
+                    },
+                    // 'postcss-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                          postcssOptions: {
+                            plugins: [
+                              [
+                                'autoprefixer',
+                                {
+                                  // Options
+                                },
+                              ],
+                            ],
+                          },
+                        }
+                    },
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.(png|jpg|jpeg|svg|gif)$/,
@@ -243,12 +286,12 @@ module.exports = {
                 ],
                 type: 'javascript/auto'
             },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                // include: path.resolve(__dirname, 'src/js'), // ?
-                use: jsLoaders()
-            },
+            // {
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     // include: path.resolve(__dirname, 'src/js'), // ?
+            //     use: jsLoaders()
+            // },
             {
                 test: /\.html$/,
                 include: path.resolve(__dirname, 'src/assets/templates'),

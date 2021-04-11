@@ -4,7 +4,12 @@ import s from './button.module.scss';
 import Context from '../../context';
 import { ADD_OPERATION, ADD_VALUE, ADD_OPTION } from '../../store/actions';
 
-function Button(props) {
+interface ButtonProps {
+    value: string,
+    object: string,
+}
+
+function Button(props:ButtonProps) {
     const { value, object } = props;
 
     const { dispatch } = useContext(Context);

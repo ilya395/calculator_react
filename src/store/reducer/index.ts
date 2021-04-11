@@ -10,7 +10,20 @@ import {
 } from '../actions';
 import { DISPLAY_LENGTH } from '../../constants';
 
-export const initialState = {
+export interface StateType {
+    result: number | null,
+    operation: string | null,
+    value: number | null,
+    option: string | null,
+    rendering: number | null,    
+}
+
+export interface ActionType {
+    type: string,
+    payload: string
+}
+
+export const initialState: StateType = {
     result: null,
     operation: null,
     value: null,
@@ -18,7 +31,7 @@ export const initialState = {
     rendering: null,
 }
 
-export default function defaultReducer(state, action) {
+export function defaultReducer(state: StateType, action: ActionType) {
     switch (action.type) {
         case ADD_RESULT:
             return {...state, result: action.payload};

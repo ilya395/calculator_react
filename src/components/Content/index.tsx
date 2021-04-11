@@ -6,7 +6,7 @@ import Display from '../Display';
 import Button from '../Button';
 
 function Content() {
-    const [allNumbers, setAllNumbers] = useState([9,8,7,6,5,4,3,2,1]);
+    const [allNumbers, setAllNumbers] = useState<number[]>([9,8,7,6,5,4,3,2,1]);
     return (
         <>
             <main className={cn(s['main'])}>
@@ -15,7 +15,7 @@ function Content() {
                         <Display />
                         <div className={cn(s['calc-block__numbers'])}>
                             {
-                                allNumbers.map((item, index) => <Button key={index} object={'number'} value={item} />)
+                                allNumbers.map((item, index) => <Button key={index} object={'number'} value={String(item)} />)
                             }
                         </div>
                         <div className={cn(s['calc-block__options'])}>
