@@ -9,6 +9,7 @@ import Content from './components/Content';
 import { defaultReducer } from './store/reducer';
 import { initialState } from './store/reducer';
 import Context from './context';
+import { BUTTONS_ARRAY } from './constants';
 // const Context = require('./context');
 
 import { StateType, ActionType } from './store/reducer';
@@ -19,6 +20,7 @@ interface ContextValue {
     option: string | null,
     rendering: string | number | null,
     dispatch: any, // void
+    buttonsArray: number[]
 }
 
 function App() {
@@ -30,24 +32,18 @@ function App() {
         operation: null, // state.operation,
         option: null, // state.option,
         rendering: null, // state.rendering,
+        buttonsArray: [],
         dispatch
     });
 
-    // const thisValue: CustomObject = {
-    //     value: state.value,
-    //     operation: state.operation,
-    //     option: state.option,
-    //     rendering: state.rendering,
-    //     dispatch
-    // } || null;
-
     useEffect(() => {
-        const { value, operation, option, rendering } = state;
+        const { value, operation, option, rendering, buttonsArray } = state;
         setVal({
             value,
             operation,
             option,
             rendering,
+            buttonsArray,
             dispatch
         });
     }, [state])

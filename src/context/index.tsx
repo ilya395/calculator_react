@@ -5,6 +5,7 @@ interface ContextValue {
     operation: string | null,
     option: string | null,
     rendering: string | number | null,
+    buttonsArray: number[] | [],
     dispatch: any, // void
 }
 

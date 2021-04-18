@@ -130,7 +130,7 @@ module.exports = {
     context: path.resolve(__dirname, 'src'), // со всех путях  удаляю эту папку
     mode: 'development',
     entry: { // точка входа в приложение, откуда начать
-        script: ['@babel/polyfill', './index.ts'],
+        script: ['./index.ts'], // ['@babel/polyfill', './index.ts'],
         // style: './assets/sass/style.scss',
         // 'assets/js/index': ['@babel/polyfill', './assets/js/index.js'],
         // 'assets/css/style': './assets/sass/style.scss'

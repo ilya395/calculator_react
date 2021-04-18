@@ -8,14 +8,15 @@ import {
     ADD_OPTION,
     RESET_OPTION
 } from '../actions';
-import { DISPLAY_LENGTH } from '../../constants';
+import { DISPLAY_LENGTH, BUTTONS_ARRAY } from '../../constants';
 
 export interface StateType {
     result: number | null,
     operation: string | null,
     value: number | null,
     option: string | null,
-    rendering: number | null,    
+    rendering: number | null, 
+    buttonsArray: number[] | [],
 }
 
 export interface ActionType {
@@ -29,6 +30,7 @@ export const initialState: StateType = {
     value: null,
     option: null,
     rendering: null,
+    buttonsArray: BUTTONS_ARRAY
 }
 
 export function defaultReducer(state: StateType, action: ActionType) {

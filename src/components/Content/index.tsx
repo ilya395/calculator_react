@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import cn from 'classnames';
 import s from './content.module.scss';
+
+import Context from '../../context';
 
 import Display from '../Display';
 import Button from '../Button';
 
+import { BUTTONS_ARRAY } from '../../constants';
+
 function Content() {
-    const [allNumbers, setAllNumbers] = useState<number[]>([9,8,7,6,5,4,3,2,1]);
+    // const { buttonsArray } = useContext(Context);
+    // console.log(buttonsArray)
+
+    // const [allNumbers, setAllNumbers] = useState<number[]>([]);
+
+    // useEffect(() => {
+    //     buttonsArray ? setAllNumbers(buttonsArray) : setAllNumbers([]);
+    // }, [buttonsArray]);
     return (
         <>
             <main className={cn(s['main'])}>
@@ -15,7 +26,7 @@ function Content() {
                         <Display />
                         <div className={cn(s['calc-block__numbers'])}>
                             {
-                                allNumbers.map((item, index) => <Button key={index} object={'number'} value={String(item)} />)
+                                BUTTONS_ARRAY.map((item, index) => <Button key={index} object={'number'} value={String(item)} />)
                             }
                         </div>
                         <div className={cn(s['calc-block__options'])}>
